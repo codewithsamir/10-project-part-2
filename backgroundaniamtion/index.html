@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background animation
+
+    </title>
+    <style>
+        body{
+            min-height: 100vh;
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+       
+        }
+        .box{
+            width: 50px;
+aspect-ratio: 1/1;
+
+            border-radius: 50%;
+            background-color: #0f0;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 0 10px #0f0,
+            0 0 20px #0f0,
+            0 0 30px #0f0;
+            animation: animate 5s linear forwards;
+        }
+        @keyframes animate{
+            0%{
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50%{
+                
+                opacity: 1;
+            }
+            100%{
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        .box::after{
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 25%;
+            width: 50%;
+            height: 100vh;
+            opacity: .5;
+            background: linear-gradient(#0f0, transparent);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function dropline(){
+            let sm = document.createElement("div")
+            sm.setAttribute("class","box")
+            document.body.appendChild(sm)
+            let sizew = Math.random()* 12;
+        let duration = Math.random()* 3;
+        sm.style.width = 2 + sizew + 'px'
+        sm.style.left= Math.random()* + innerWidth + 'px'
+        sm.style.animationDuration = 2 + duration + 's'
+            setTimeout(function(){
+                document.body.removeChild(sm)
+            },5000)
+        }
+        setInterval(function() {
+            dropline()
+        }, 1000);
+      
+        
+    </script>
+</body>
+</html>

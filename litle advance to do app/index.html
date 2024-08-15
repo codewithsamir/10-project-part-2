@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do app</title>
+    <style>
+        body{
+            width: 100%;
+           
+            background: #000;
+            color: #0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        form{
+            display: flex;
+        }
+        input{
+            padding: 20px;
+            font-size: 1.2rem;
+        }
+        .btn{
+            padding: 10px 20px;
+            background: rgb(24, 141, 24);
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .del{
+            padding: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To do app</h1>
+    <form action="#">
+        <input type="text">
+        <button class="btn">ADD</button>
+    </form>
+    <div class="show-todo"></div>
+
+
+<script>
+    const form = document.querySelector("form")
+    const input = document.querySelector("input")
+    const showtodo = document.querySelector(".show-todo")
+    const storetodo = [];
+   function loadtodo(){
+        const getstorevalue =  JSON.parse(localStorage.getItem("todo"))
+        
+        getstorevalue.forEach(element => {
+            addtodo(element)
+            
+        });
+    }
+form.addEventListener("submit",(e)=>{
+    e.preventDefault()
+  if(input.value !== ""){
+    addtodo(input.value)
+    storetodo.push(input.value)
+    storelocalstorage()
+    input.value=""
+  }
+    
+})
+function addtodo(todo){
+const h2elem = document.createElement("h2")
+
+
+
+
+        h2elem.innerText = todo
+    
+
+// console.log(typeof getstorevalue)
+const remove  = document.createElement("button")
+remove.setAttribute("class",
+"del")
+remove.innerText= "done"
+remove.addEventListener("click",(e)=>{
+    h2elem.remove()
+    storetodo = storetodo.filter((item) => item !== todo);
+                storelocalstorage();
+})
+h2elem.append(remove)
+showtodo.append(h2elem)
+
+}
+function storelocalstorage (){
+    
+    localStorage.setItem("todo",JSON.stringify(storetodo))
+
+
+}
+// const renderformlocalstoreage = ()=>{
+
+//   const getstorevalue =  localStorage.getItem("todo",storetodo)
+// console.log(getstorevalue)
+// }
+// renderformlocalstoreage()
+
+loadtodo()
+
+</script>
+
+</body>
+</html>

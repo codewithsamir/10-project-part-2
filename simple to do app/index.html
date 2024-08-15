@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple to do app</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1>simple to do app</h1>
+    <div class="to-do-app">
+        <input type="text" id="input">
+        <button class="add">ADD</button>
+    </div>
+    <ul class="list-your-todo">
+
+    </ul>
+</body>
+<script>
+const input= document.getElementById("input")
+const btn = document.querySelector(".add")
+const showtodo = document.querySelector(".list-your-todo")
+
+
+btn.addEventListener("click",()=>{
+    let list = document.createElement("li")
+    list.innerText = input.value
+    showtodo.append(list)
+    input.value= ""
+})
+
+
+
+
+
+</script>
+</html>

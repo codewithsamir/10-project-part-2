@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Mouse Select</title>
+    <style>
+        .select {
+            position: absolute;
+            display: none; 
+            border: 1px solid rgba(50, 137, 250, 0.576);
+            background-color: rgba(67, 144, 226, 0.569);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="select"></div>
+    <script>
+        const select = document.querySelector(".select");
+        let isSelecting = false;
+
+        window.addEventListener("mousedown", (e) => {
+            isSelecting = true;
+            select.style.left = `${e.clientX}px`;
+            select.style.top = `${e.clientY}px`;
+            select.style.width = "0px";
+            select.style.height = "0px";
+            select.style.display = "block"; // Show the selection box on mousedown
+        });
+
+        window.addEventListener("mousemove", (e) => {
+            if (isSelecting) {
+                const width = e.clientX - parseFloat(select.style.left);
+                const height = e.clientY - parseFloat(select.style.top);
+                select.style.width = `${width}px`;
+                select.style.height = `${height}px`;
+            }
+        });
+
+        window.addEventListener("mouseup", () => {
+            isSelecting = false;
+            // select.style.display = "none";
+            //     select.style.width = "0px";
+            //     select.style.height = "0px";
+        });
+
+        window.addEventListener("mouseout", (e) => {
+            // Hide and reset the selection box when the mouse leaves the window
+            if (isSelecting && (e.relatedTarget === null || e.relatedTarget.nodeName === 'HTML')) {
+                isSelecting = false;
+                select.style.display = "none";
+                select.style.width = "0px";
+                select.style.height = "0px";
+            }
+        });
+    </script>
+</body>
+</html>
